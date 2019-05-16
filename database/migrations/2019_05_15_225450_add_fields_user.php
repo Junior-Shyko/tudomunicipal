@@ -16,6 +16,8 @@ class AddFieldsUser extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->date('birth')->nullable();
             $table->string('address', 150)->nullable();
+            $table->string('phone', 25)->nullable();
+            $table->string('cpf', 25)->nullable();
             $table->unsignedBigInteger('city_id');
             $table->unsignedBigInteger('state_id');
 

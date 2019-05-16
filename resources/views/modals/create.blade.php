@@ -9,33 +9,35 @@
             </button>
         </div>
         <div class="modal-body">
+            <form action="/" method="POST" id="formSaveUser">
+                @csrf
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label >Nome</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <input type="text" class="form-control" name="name" placeholder="Nome completo">
                     </div>
                     <div class="form-group">
                         <label >CPF</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <input type="text" class="form-control" id="number-cpf" name="cpf" placeholder="___.___.___-__">
                     </div>
                     <div class="form-group">
                         <label >Data Nascimento</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <input type="text" class="form-control" id="birth-date" name="birth" placeholder="__/__/____">
                     </div>
                     <div class="form-group">
                         <label >E-mail</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <input type="email" class="form-control" name="email" placeholder="Seu e-mail">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label >Telefone</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <input type="text" class="form-control" name="phone" id="phone-number" placeholder="Número celular">
                     </div>
                     <div class="form-group">
                         <label >Endereço</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <input type="text" class="form-control" name="address" placeholder="Endereço completo">
                     </div>
                     <div class="form-group">
                         <label >Estado</label>
@@ -51,17 +53,18 @@
                     <div id="loadCity"> <img src="{{url('img/25.gif')}}" alt="" width="16"> </div>
                         <select name="city_id" id="selectCity" class="form-control">
                             <option value="">--Selecione</option>
-                            
-                            
                         </select>
                     </div>
                     
                 </div>
             </div>
+            </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary float-left" data-dismiss="modal">Sair</button>
+            <button type="button" id="btn_save" class="btn btn-primary"> Salvar
+                <i class="fa fa-save"></i>
+            </button>
         </div>
         </div>
     </div>

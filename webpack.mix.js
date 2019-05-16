@@ -11,5 +11,18 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.scripts([
+    'resources/js/jquery.min.js',
+    'resources/js/popper.min.js',
+    'resources/js/bootstrap.min.js',
+    'resources/js/perfect-scrollbar.jquery.min.js',
+    'resources/js/bootstrap-notify.js',
+    'resources/js/jquery.mask.min.js',
+    'resources/js/user.js'
+], 'public/js/app.js');
+
+mix.styles([
+    'resources/css/bootstrap.min.css',
+    'resources/css/paper-dashboard.min.css',
+    'resources/css/demo.css',
+], 'public/css/app.css');

@@ -1,158 +1,48 @@
+@extends('layouts.layout')
 
-<!DOCTYPE html>
-<html lang="en">
+@section('title', 'Cadastro')
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>
-    Tudo Municipal - Teste
-  </title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-  <!-- CSS Files -->
-  <link href="https://demos.creative-tim.com/paper-dashboard/assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://demos.creative-tim.com/paper-dashboard/assets/css/paper-dashboard.min.css?v=2.0.0" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="https://demos.creative-tim.com/paper-dashboard/assets/demo/demo.css" rel="stylesheet" />
-  <script>
-        //GLOBALIZANDO URL
-            var project_survey = ':8000/';
-            domin  =  window.location.protocol + "//" + window.location.hostname;
-            var domain_complet = domin + project_survey; 
-            var url = window.location.origin;
-           
-        </script>
-</head>
-
-<body class="">
-  <div class="wrapper ">
-    <div class="sidebar" data-color="white" data-active-color="danger">
-      <!--
-        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
-    -->
-      <div class="logo">
-        <a href="https://tudomunicipal.com.br/img/logo_mini.png" class="simple-text logo-mini">
-          <div class="logo-image-small">
-            <img src="../assets/img/logo-small.png">
-          </div>
-        </a>
-        <a href="https://tudomunicipal.com.br/img/logo_mini.png" class="simple-text logo-normal">
-         TudoMunicipal
-          <!-- <div class="logo-image-big">
-            <img src="../assets/img/logo-big.png">
-          </div> -->
-        </a>
-      </div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li>
-            <a href="#">
-              <i class="nc-icon nc-bank"></i>
-              <p>Dashboard</p>
-            </a>
-            </li>
-          <li>
-            <a href="#exampleModal" data-toggle="modal">
-              <i class="nc-icon nc-simple-add"></i>
-              <p>Cadastrar</p>
-            </a>
-            </li>
-        </ul>
-      </div>
-    </div>
-    <div class="main-panel">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <div class="navbar-toggle">
-              <button type="button" class="navbar-toggler">
-                <span class="navbar-toggler-bar bar1"></span>
-                <span class="navbar-toggler-bar bar2"></span>
-                <span class="navbar-toggler-bar bar3"></span>
-              </button>
-            </div>
-            <a class="navbar-brand" href="#pablo">Teste de Cadastro - Teste</a>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navigation">
-
-            
-          </div>
-        </div>
-      </nav>
-      <!-- End Navbar -->
-      <!-- <div class="panel-header panel-header-sm">
-  
-  
-</div> -->
-      <div class="content">
-        <div class="row">
-
-          <div class="col-md-12">
-            <div class="card card-user">
-              <div class="card-header">
+@section('content')
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-user">
+            <div class="card-header">
                 <h5 class="card-title">Lista de Usuário</h5>
-              </div>
-              <div class="card-body">
-                  <h1>Conteúdo</h1>
-              </div>
             </div>
-          </div>
-        @include('modals.create')  
-        </div>
-      </div>
-      <footer class="footer footer-black  footer-white ">
-        <div class="container-fluid">
-          <div class="row">
-            <nav class="footer-nav">
-              <ul>
-                <li>
-                 
-                </li>
-                <li>
-                  
-                </li>
-                <li>
-                 
-                </li>
-              </ul>
-            </nav>
-            <div class="credits ml-auto">
-              <span class="copyright">
-                ©
-                <script>
-                  document.write(new Date().getFullYear())
-                </script>, dev <i class="fa fa-heart heart"></i> by Junior Oliveira
-              </span>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Cidade</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Ação</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($user as $users)
+                            <tr>
+                            <td>{{$users->name}}</td>
+                            <td>{{$users->email}}</td>
+                            <td>{{$users->city_id}}</td>
+                            <td>{{$users->state_id}}</td>
+                            <td>
+                                <a href="#" class="btn btn-primary" title="Editar" >
+                                    <i class="fa fa-edit"></i>    
+                                </a>
+                                <a href="#" class="btn btn-danger" title=" Excluir ">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                                
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>    
             </div>
-          </div>
         </div>
-      </footer>
     </div>
-  </div>
-  <!--   Core JS Files   -->
-  <script src="https://demos.creative-tim.com/paper-dashboard/assets/js/core/jquery.min.js"></script>
-  <script src="https://demos.creative-tim.com/paper-dashboard/assets/js/core/popper.min.js"></script>
-  <script src="https://demos.creative-tim.com/paper-dashboard/assets/js/core/bootstrap.min.js"></script>
-  <script src="https://demos.creative-tim.com/paper-dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-   <!--  Notifications Plugin    -->
-  <script src="https://demos.creative-tim.com/paper-dashboard/assets/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="https://demos.creative-tim.com/paper-dashboard/assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
-  <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-  <script src="https://demos.creative-tim.com/paper-dashboard/assets/demo/demo.js"></script>
-<script src="{{url('js/user.js')}}"></script>
-</body>
-
-</html>
+    @include('modals.create')  
+</div>
+@endsection
