@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#createUser").modal('show');
+  
     //ocutando load cidades
     hideReload();
     $.ajaxSetup({
@@ -59,9 +59,19 @@ $("#btn_save").click(function (e) {
             successNotify();//MENSAGEM DE SUCESSO;
             $("#createUser").modal('hide');//FECHANDO O MODAL
             $('#formSaveUser')[0].reset();//RESETANDO O FORM
+            //atualizando a página apos 3 segundos
+            setTimeout(function(){ 
+                window.location.href= domain_complet;
+            }, 3000);
         }
     });
 });
+
+function deleteUser(id){
+    console.log(id);
+    $("#deleteUser").modal('show');
+    $("#deleteUserId").val(id);
+}
 //PARA MENSAGEM DE SUCESSO
 function successNotify(){
     $.notify({

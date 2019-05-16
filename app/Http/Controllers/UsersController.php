@@ -14,7 +14,14 @@ class UsersController extends Controller
     public function index()
     {
         $state = DB::table('state')->get();
-        $user = User::all();
+        DB::enableQueryLog();
+        $user = DB::table('users as u1')
+            ->join('city as cid', 'u1.city_id', '=', 'cid.id')
+            ->join('state as sta', 'u1.state_id', '=', 'sta.id')
+            ->select('u1.name as username', 'u1.*', 'cid.name as nameCity' , 'sta.name as nameState', 'cid.*' , 'sta.*', 'u1.id as idUser')
+            ->get();
+        
+       // return DB::getQueryLog();  
         return view('user.index', compact('state' , 'user'));
     }
 
@@ -36,6 +43,12 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        //SE TIVER ALGUM VALOR NO CAMPO ALTERA O FORMATO DA DATA
+        if(!empty($request['birth'])){
+            $request['birth'] = User::DataBRtoMySQL($request['birth']);
+        }else{
+            unset($request['birth']);
+        }        
         try {
             User::create($request->all());
             return response()->json(['message' => 'success'] , 200);
@@ -63,7 +76,14 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $state = DB::table('state')->get();
+        $user = DB::table('users as u1')
+        ->join('city as cid', 'u1.city_id', '=', 'cid.id')
+        ->join('state as sta', 'u1.state_id', '=', 'sta.id')
+        ->select('u1.name as username', 'u1.*', 'cid.name as nameCity' , 'sta.name as nameState', 'cid.*' , 'sta.*', 'u1.id as idUser')
+        ->where('u1.id' , $id)
+        ->first();
+        return view('user.edit', compact('state' , 'user'));
     }
 
     /**
@@ -75,7 +95,15 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $input = $request->except('_token', '_method');
+        
+        try {
+            User::where('id' , $id)->update($input);
+            return redirect('usuario')->with(['success'=>'Usuário Alterado com sucesso']);
+        } catch (\Throwable $th) {
+            return redirect('usuario')->with(['error'=>'Ocorreu um erro']);
+        }
     }
 
     /**
@@ -84,9 +112,14 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        try {
+            User::where('id', $request['id'])->delete();
+            return back()->with(['success' => 'Usuário Excluido com sucesso']);
+        } catch (\Throwable $th) {
+            return back()->with(['error' => 'error: '. $th->getMessage()]);
+        }
     }
 
     public function getCity($id)

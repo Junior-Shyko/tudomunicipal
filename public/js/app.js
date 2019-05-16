@@ -472,7 +472,7 @@ delete a.maskWatchers[this.selector];return this.each(function(){var b=a(this).d
 h("input"),watchDataMask:!1,byPassKeys:[9,16,17,18,36,37,38,39,40,91],translation:{0:{pattern:/\d/},9:{pattern:/\d/,optional:!0},"#":{pattern:/\d/,recursive:!0},A:{pattern:/[a-zA-Z0-9]/},S:{pattern:/[a-zA-Z]/}}};a.jMaskGlobals=a.jMaskGlobals||{};h=a.jMaskGlobals=a.extend(!0,{},h,a.jMaskGlobals);h.dataMask&&a.applyDataMask();setInterval(function(){a.jMaskGlobals.watchDataMask&&a.applyDataMask()},h.watchInterval)},window.jQuery,window.Zepto);
 
 $(document).ready(function () {
-    $("#createUser").modal('show');
+  
     //ocutando load cidades
     hideReload();
     $.ajaxSetup({
@@ -532,9 +532,19 @@ $("#btn_save").click(function (e) {
             successNotify();//MENSAGEM DE SUCESSO;
             $("#createUser").modal('hide');//FECHANDO O MODAL
             $('#formSaveUser')[0].reset();//RESETANDO O FORM
+            //atualizando a página apos 3 segundos
+            setTimeout(function(){ 
+                window.location.href= domain_complet;
+            }, 3000);
         }
     });
 });
+
+function deleteUser(id){
+    console.log(id);
+    $("#deleteUser").modal('show');
+    $("#deleteUserId").val(id);
+}
 //PARA MENSAGEM DE SUCESSO
 function successNotify(){
     $.notify({

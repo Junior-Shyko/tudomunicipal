@@ -18,14 +18,14 @@
         <div class="sidebar-wrapper">
            <ul class="nav">
               <li>
-                 <a href="#">
-                    <i class="nc-icon nc-bank"></i>
+              <a href="{{url('/')}}">
+                    <i class="fa fa-home"></i>
                     <p>Dashboard</p>
                  </a>
               </li>
               <li>
-                 <a href="#exampleModal" data-toggle="modal">
-                    <i class="nc-icon nc-simple-add"></i>
+                 <a href="#createUser" data-toggle="modal">
+                    <i class="fa fa-plus"></i>
                     <p>Cadastrar</p>
                  </a>
               </li>

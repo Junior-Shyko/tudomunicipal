@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //FUNCAO QUE TROCA O FORMATO PARA DATA MYSQL
+    static public function DataBRtoMySQL( $DataBR ) 
+    {
+		$DataBR = str_replace(array(" – ","-"," "," "), " ", $DataBR);
+		list($data) = explode(" ", $DataBR);
+		return implode("-",array_reverse(explode("/",$data))) ;
+	}
 }

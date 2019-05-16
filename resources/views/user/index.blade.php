@@ -5,6 +5,16 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
         <div class="card card-user">
             <div class="card-header">
                 <h5 class="card-title">Lista de Usuário</h5>
@@ -23,15 +33,15 @@
                     <tbody>
                         @foreach ($user as $users)
                             <tr>
-                            <td>{{$users->name}}</td>
+                            <td>{{$users->username}}</td>
                             <td>{{$users->email}}</td>
-                            <td>{{$users->city_id}}</td>
-                            <td>{{$users->state_id}}</td>
+                            <td>{{$users->nameCity}}</td>
+                            <td>{{$users->nameState}}</td>
                             <td>
-                                <a href="#" class="btn btn-primary" title="Editar" >
+                            <a href="{{url('usuario/'.$users->idUser.'/edit')}}" class="btn btn-primary" title="Editar" >
                                     <i class="fa fa-edit"></i>    
                                 </a>
-                                <a href="#" class="btn btn-danger" title=" Excluir ">
+                                <a href="#" onclick="deleteUser({{$users->idUser}})" class="btn btn-danger" title=" Excluir ">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>
@@ -44,5 +54,6 @@
         </div>
     </div>
     @include('modals.create')  
+    @include('modals.delete')  
 </div>
 @endsection
