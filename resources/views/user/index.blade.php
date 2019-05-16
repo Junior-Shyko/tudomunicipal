@@ -7,6 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>
     Tudo Municipal - Teste
   </title>
@@ -19,6 +20,14 @@
   <link href="https://demos.creative-tim.com/paper-dashboard/assets/css/paper-dashboard.min.css?v=2.0.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="https://demos.creative-tim.com/paper-dashboard/assets/demo/demo.css" rel="stylesheet" />
+  <script>
+        //GLOBALIZANDO URL
+            var project_survey = ':8000/';
+            domin  =  window.location.protocol + "//" + window.location.hostname;
+            var domain_complet = domin + project_survey; 
+            var url = window.location.origin;
+           
+        </script>
 </head>
 
 <body class="">
@@ -49,7 +58,7 @@
             </a>
             </li>
           <li>
-            <a href="#">
+            <a href="#exampleModal" data-toggle="modal">
               <i class="nc-icon nc-simple-add"></i>
               <p>Cadastrar</p>
             </a>
@@ -100,6 +109,7 @@
               </div>
             </div>
           </div>
+        @include('modals.create')  
         </div>
       </div>
       <footer class="footer footer-black  footer-white ">
@@ -136,14 +146,13 @@
   <script src="https://demos.creative-tim.com/paper-dashboard/assets/js/core/popper.min.js"></script>
   <script src="https://demos.creative-tim.com/paper-dashboard/assets/js/core/bootstrap.min.js"></script>
   <script src="https://demos.creative-tim.com/paper-dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
    <!--  Notifications Plugin    -->
   <script src="https://demos.creative-tim.com/paper-dashboard/assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="https://demos.creative-tim.com/paper-dashboard/assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
   <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
   <script src="https://demos.creative-tim.com/paper-dashboard/assets/demo/demo.js"></script>
+<script src="{{url('js/user.js')}}"></script>
 </body>
 
 </html>
