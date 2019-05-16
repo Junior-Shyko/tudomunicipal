@@ -8,19 +8,26 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <form action="{{url('usuario/excluir')}}" method="post">
+                @method('DELETE')
+                
             <div class="modal-body">
                 <div class="row">
-                    <h3>Deseja realmente excluir esse usuário?</h3>
-                    <form action="{{url('usuario/excluir')}}" method="post">
-                        @csrf
-                        <input type="text" name="id" id="deleteUserId">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger">
+                            <h5>Deseja realmente excluir esse usuário?</h5>
+                        </div>
+                    </div>
+                    
+                    @csrf
+                    <input type="hidden" name="id" id="deleteUserId">
                 </div>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-danger">Excluir</button>
-            </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                <button type="submit" class="btn btn-danger">Sim</button>                
             </div>
+            </form>
         </div>
     </div>
 </div>

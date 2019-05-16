@@ -21,19 +21,9 @@ class UsersController extends Controller
             ->select('u1.name as username', 'u1.*', 'cid.name as nameCity' , 'sta.name as nameState', 'cid.*' , 'sta.*', 'u1.id as idUser')
             ->get();
         
-       // return DB::getQueryLog();  
         return view('user.index', compact('state' , 'user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -58,17 +48,6 @@ class UsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -77,6 +56,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $state = DB::table('state')->get();
+        //JUNTANDO AS TRES TABELAS
         $user = DB::table('users as u1')
         ->join('city as cid', 'u1.city_id', '=', 'cid.id')
         ->join('state as sta', 'u1.state_id', '=', 'sta.id')
@@ -96,8 +76,7 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        $input = $request->except('_token', '_method');
-        
+        $input = $request->except('_token', '_method');//retirando os campos        
         try {
             User::where('id' , $id)->update($input);
             return redirect('usuario')->with(['success'=>'Usuário Alterado com sucesso']);
